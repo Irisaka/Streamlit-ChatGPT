@@ -1,11 +1,7 @@
 import streamlit as st
-import os
 import openai
-from dotenv import find_dotenv, load_dotenv
 
-load_dotenv(find_dotenv('.env'))
-env_dist = os.environ
-openai.api_key = env_dist.get("OPENAI_API_KEY")
+openai.api_key = st.secrets["API_KEY"]
 
 def main():
     st.set_page_config(
