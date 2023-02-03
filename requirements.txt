@@ -1,4 +1,7 @@
 openai
 streamlit
 streamlit_chat
+pre-commit
+tiktoken
 revChatGPT
+streamlit-elements==0.1.*
