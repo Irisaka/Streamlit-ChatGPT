@@ -5,9 +5,10 @@ Use Streamlit to quickly build a ChatGPT-based Web page. ChatGPT API is based on
 2. `pip install -r requirements.txt`
 3. Insert your openai account information.
 ```python
+# in chatgptbot.py
 st.session_state.chatbot = Chatbot(config={
-    "email": st.secrets["openai_email"],        //"email": your openai email
-    "password": st.secrets["openai_password"]   //"password": your openai password
+    "email": st.secrets["openai_email"],        # "email": your openai email
+    "password": st.secrets["openai_password"]   # "password": your openai password
 })
 ```
 ## Run locally
