@@ -1,7 +1,7 @@
 import streamlit as st
 from streamlit_chat import message
 from streamlit_elements import elements, mui, lazy, sync, event
-from revChatGPT.Official import Chatbot
+from revChatGPT.V1 import Chatbot
 
 def main():
 
@@ -17,7 +17,10 @@ def main():
         st.session_state['message_history'] = []
 
     if 'chatbot' not in st.session_state:
-        st.session_state.chatbot = Chatbot(api_key=st.secrets["API_KEY"])
+        st.session_state.chatbot = Chatbot(config={
+            "email": st.secrets["openai_email"],
+            "password": st.secrets["openai_password"]
+        })
 
     # if 'user_input' not in st.session_state:
     #     st.session_state.user_input = None
@@ -47,12 +50,16 @@ def main():
                 message(st.session_state['message_history'][-1][0], is_user=st.session_state['message_history'][-1][1]) # display the latest message
 
             chatbot = st.session_state.chatbot
-            PROMPT =  "\nUser:\n" + text
-            response = chatbot.ask(PROMPT)
+            PROMPT =  text
+            response = ""
+            for data in chatbot.ask(
+                PROMPT
+            ):
+                response = data["message"]
             st.session_state.chatbot = chatbot
 
-            print("ChatGPT: " + response["choices"][0]["text"])
-            st.session_state['message_history'].append([response["choices"][0]["text"], 0])
+            print("ChatGPT: " + response)
+            st.session_state['message_history'].append([response, 0])
             with placeholder2.container():
                 message(st.session_state['message_history'][-1][0], is_user=st.session_state['message_history'][-1][1]) # display the latest message
 
