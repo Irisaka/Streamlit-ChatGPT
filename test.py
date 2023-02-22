@@ -1,8 +1,8 @@
 from revChatGPT.V1 import Chatbot
 
 chatbot = Chatbot(config={
-    "email": "107071603@qq.com",
-    "password": "why20010803"
+    "email": "",
+    "password": ""
 })
 
 prompt = "how many beaches does portugal have?"
